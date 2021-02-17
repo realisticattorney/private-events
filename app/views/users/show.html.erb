@@ -1,0 +1,11 @@
+<p id="notice"><%= notice %></p>
+
+<%= user_event(@user.event) %>
+   <% @users.each do |user| %>
+   <%= user.events :title, class:"form-control-sm" %>
+   <% end %>
+
+
+<%= link_to 'Back', articles_path, class: 'text-primary' %>
+
+<%= link_to 'Back', users_path %>
