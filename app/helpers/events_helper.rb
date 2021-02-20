@@ -1,6 +1,6 @@
 module EventsHelper
   def enrollment_button(event)
-    if current_user
+    return unless current_user
       if event.host == current_user
         link_to 'You created this event. View analytics', event_path(event)
       elsif event.enrollments.where(user: current_user).any?
