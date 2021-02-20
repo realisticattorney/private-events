@@ -18,6 +18,5 @@ class Enrollment < ApplicationRecord
   def cant_subscribe_to_own_event
     return unless new_record? && user_id.present? && (user_id == event.host_id)
       errors.add(:base, 'You can not subscribe to your own event')
-    end
   end
 end

@@ -8,6 +8,5 @@ module EventsHelper
       else
         link_to 'Free', new_enrollment_path(event), class: 'btn btn-success'
       end
-    end
   end
 end
