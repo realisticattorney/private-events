@@ -1,19 +1,75 @@
-<div class="card">
-  <div class="card-header">
-    <%= link_to event.description, event_path(event) %>
-    </div>
-  <div class="card-body">
-      <%= event.date %>
-      <%= event.host.email %>
-      <%= event.created_at.strftime('%d-%b-%Y') %>
-      </div>
-        <div class="text-right">
-          <%= event.host.email %>
+  <h2>
+    Upcoming Events
+  </h2>
+
+  <% @events.each do |event| %>
+    <% if DateTime.now.utc < event.date %>
+    
+      <div class="card">
+      <div class="card-header h2">
+        <%= link_to event.title, event_path(event) %>
         </div>
-      <div class="card-footer">
-        <%= link_to 'Edit', edit_event_path(event), class: 'btn btn-sm btn-warning' %>
-        <%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %>
-      </div>
-  </div>
+      <div class="card-body">
+          <%= event.date %>
+          <br><br>
+        <p> Upcoming in: </p>
+        <%= time_ago_in_words(event.date) %>  
+          </div>
+            <div class="text-right">
+                         <br><br>
+          <p> Host contact email: </p>
+              <%= event.host.email %>
+            </div>
+        <div class="card-footer">
+          <div class="text-center">
+          <%= enrollment_button(event) %>
+          </div>
+        </div>
+      <% if policy(event).edit? %>
+        <div class="card-footer">
+          <%= link_to 'Edit', edit_event_path(event), class: 'btn btn-sm btn-warning' %>
+              <%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %>
+         </div>
+     <% end %>
+    </div>
+  <% end %>
+<% end %>
+
 <br>
 <br>
+
+  <h2>
+    Past Events
+  </h2>
+
+  <% @events.each do |event| %>
+    <% if DateTime.now.utc > event.date %>
+      <div class="card">
+      <div class="card-header h2">
+        <%= link_to event.title, event_path(event) %>
+        </div>
+      <div class="card-body">
+          <%= event.date %>
+           <br><br>
+        <p> Days this event ocurred: </p>
+        <%= time_ago_in_words(event.date) %>
+          </div>
+            <div class="text-right">
+             <br><br>
+          <p> Host contact email: </p>
+              <%= event.host.email %>
+            </div>
+        <div class="card-footer">
+          <div class="text-center">
+          <%= enrollment_button(event) %>
+          </div>
+        </div>
+      <% if policy(event).edit? %>
+        <div class="card-footer">
+          <%= link_to 'Edit', edit_event_path(event), class: 'btn btn-sm btn-warning' %>
+              <%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %>
+         </div>
+     <% end %>
+    </div>
+  <% end %>
+<% end %>

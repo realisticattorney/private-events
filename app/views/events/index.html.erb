@@ -1,27 +1,56 @@
-<p id="notice"><%= notice %></p>
+<div class="jumbotron">
+  <div class="display-4">
+    What events do you want to event today?
+</div>
+  <div class="card-group">
+    <div class="card card-body">
+      <h1>
+        <div class="fa fa-graduation-cap"></div>
+      </h1>
+      <%= Event.count %>
+      online Events
+      <div class="row"></div>
+      Explore a variety of fresh topics
+    </div>
+    <div class="card card-body">
+      <h1>
+        <div class="fa fa-chalkboard-teacher"></div>
+        <!--.fa.fa-brain
+        -->
+      </h1>
+      <%= Event.distinct.count(:host_id) %>
+      creators of events
+      <div class="row"></div>
+      Find the right for you
+    </div>
+    <div class="card card-body">
+      <h1>
+        <div class="fa fa-user-graduate"></div>
+      </h1>
+      <%= User.count %>
+      active users
+      <div class="row"></div>
+      Join the sharing community
+    </div>
+    <div class="card card-body">
+      <h1>
+        <div class="fa fa-infinity"></div>
+      </h1>
+      Lifetime access
+    </div>
+  </div>
+  <hr/>
 
-<h1>Events</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Description</th>
       <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
- <div class="col-md-10">
-  <div class="card-columns">
-    <% @events.each do |event| %>
-      <%= render 'events/event', event: event %>
-    <% end %>
-  </div>
-</div>
-
+    <%= render 'events/event' %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Event', new_event_path %>

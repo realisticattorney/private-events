@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="/">FansOnly</a>
+  <a class="navbar-brand" href="/">Only Event Fans</a>
   <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -24,21 +24,22 @@
             New Event
           <% end %>
         </li>
+         <% if !current_user.has_role?(:fan) %>
           <li class="<%= 'active font-weight-bold' if current_page?(users_path) %> nav-item">
             <%= link_to users_path, class: 'nav-link' do %>
               <div class="fa fa-users"></div>
-              Users
+              Fans
+            <% end %>
+          </li>
+           <% end %>
+          <li class="<%= 'active font-weight-bold' if current_page?(enrollments_path) %> nav-item">
+            <%= link_to enrollments_path, class: 'nav-link' do %>
+              <div class="fa fa-lock-open"></div>
+              Enrollments
             <% end %>
           </li>
       </ul>
-    
       <ul class="navbar-nav mr-right">
-        <li class="<%= 'active font-weight-bold' if current_page?(root_path) %> nav-item">
-          <%= link_to root_path, class: 'nav-link' do %>
-            <div class="fa fa-users"></div>
-            Activity
-          <% end %>
-        </li>
         <li class="nav-item dropdown">
           <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="navbarDropdown" role="button">
             <b>

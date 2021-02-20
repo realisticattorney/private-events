@@ -6,14 +6,19 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     @users = User.all
+
+    unless current_user.has_role?(:admin)
+      redirect_to root_path, notice: 'You dont have access to this function'
+    end
+
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
     @user = User.find(current_user.id)
-    @upcoming = @user.attended_events.coming_events
-    @past_events = @user.attended_events.past_events
+    # @upcoming = @user.attended_events.coming_events
+    # @past_events = @user.attended_events.past_events
   end
 
   # GET /users/new

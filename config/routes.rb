@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :enrollments
   resources :event_attendings
   resources :events
   devise_for :users

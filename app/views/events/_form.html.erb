@@ -1,13 +1,21 @@
-
 <%= simple_form_for(@event) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="form-inputs">
+    <th> Title </th>
+    <br>
+    <%= f.text_field :title, value: event.title %>
     <%= f.input :description %>
+    <%= f.date_field :date, min: '2021-01-01' %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+    <div class="badge badge-info">
+      <%= f.button :submit %>
+    </div>
   </div>
 <% end %>
+
+
+

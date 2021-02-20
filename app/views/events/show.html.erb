@@ -1,9 +1,22 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Description:</strong>
+<div class="row">
+  <div class="col-lg-6">
+  <th> Title </th>
+  <%= @event.title %>
+  <br>
+  <br>
+  <th> Description </th>
   <%= @event.description %>
+  <br>
+  <br>
+  <th> Host </th>
+  <%= @event.host.email %>
+
 </p>
 
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', events_path %>
+  </div>
+</div>
+
