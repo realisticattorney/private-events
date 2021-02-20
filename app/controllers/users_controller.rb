@@ -7,10 +7,7 @@ class UsersController < ApplicationController
   def index
     @users = User.all
 
-    unless current_user.has_role?(:admin)
-      redirect_to root_path, notice: 'You dont have access to this function'
-    end
-
+    redirect_to root_path, notice: 'You dont have access to this function' unless current_user.has_role?(:admin)
   end
 
   # GET /users/1

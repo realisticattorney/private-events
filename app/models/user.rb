@@ -5,28 +5,22 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-has_many :event_attendings, foreign_key: :event_attendee_id
-has_many :hosted_events, foreign_key: :host_id, class_name: 'Event'
-has_many :enrollments
+  has_many :event_attendings, foreign_key: :event_attendee_id
+  has_many :hosted_events, foreign_key: :host_id, class_name: 'Event'
+  has_many :enrollments
 
+  after_create :assign_default_role
 
-
-
-after_create :assign_default_role
-
-def assign_default_role
-  if User.count == 1
-    self.add_role(:admin) if self.roles.blank?
-    self.add_role(:fan)
-  else
-    self.add_role(:fan) if self.roles.blank?
+  def assign_default_role
+    if User.count == 1
+      add_role(:admin) if roles.blank?
+      add_role(:fan)
+    elsif roles.blank?
+      add_role(:fan)
+    end
   end
-end
 
-def enroll_event(event)
-  self.enrollments.create(event: event)
-end
-
-
-
+  def enroll_event(event)
+    enrollments.create(event: event)
+  end
 end
