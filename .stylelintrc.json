@@ -6,5 +6,12 @@
       "scss/at-rule-no-unknown": true,
       "csstree/validator": true
     },
-    "ignoreFiles": ["build/**", "dist/**", "**/reset*.css", "**/bootstrap*.css"]
-  }
+    "ignoreFiles": ["build/**", "dist/**", "**/reset*.css", "**/bootstrap*.css"],
+  
+  "stylelint": {
+    "extends": "/Volumes/Macintosh/Users/paulrobertlloyd/.atom/packages/linter-stylelint/node_modules/stylelint-config-standard",
+    "rules": {
+        "indentation": 4
+    }
+}
+}
