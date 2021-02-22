@@ -13,6 +13,18 @@ class Enrollment < ApplicationRecord
     "#{user} #{event}"
   end
 
+
+  scope :upcoming, -> { joins(:event).merge(Event.upcoming) }
+  scope :past, -> { joins(:event).merge(Event.past) }
+
+  def get_users_invited_to_event(id)
+    Invitation.where(event_id: id)
+  end
+
+  def get_events_attended_by_user(id)
+    Invitation.where(user_id: id)
+  end
+
   protected
 
   def cant_subscribe_to_own_event

@@ -2,12 +2,17 @@ class Event < ApplicationRecord
   validates :title, presence: true
   validates :description, presence: true, length: { minimum: 5 }
 
-  belongs_to :host, class_name: 'User', foreign_key: :host_id
-  has_many :enrollments
+  belongs_to :host, class_name: :User, foreign_key: :host_id
+  has_many :enrollments, dependent: :destroy
+  has_many :attendees, through: :enrollments, source: :user
 
   def to_s
     title
   end
+
+  scope :upcoming, -> { where('date > ?', Time.now) }
+  scope :past, -> { where('date < ?', Time.now) }
+
 
   # def enrolled(user)
   #     self.enrollments.where(host_id: [user.id], event_id: [self.id]).empty?
