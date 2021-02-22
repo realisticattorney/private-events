@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe 'create event', type: :feature do
   scenario 'with valid user and valid inputs' do
     visit new_user_registration_path
-    fill_in 'Username', with: 'username_test'
     fill_in 'Email', with: 'newusertest@user.com'
     fill_in 'Password', with: 'password'
     fill_in 'Password confirmation', with: 'password'
@@ -12,7 +11,7 @@ RSpec.describe 'create event', type: :feature do
     visit new_event_path
     fill_in 'Title', with: 'new test event'
     fill_in 'The event details', with: 'test text'
-    fill_in 'The date of the event', with: Time.now
+    fill_in 'The date of the event', with: DateTime.now
     click_on 'Create Event'
 
     expect(page).to have_content('Event was successfully created.')
@@ -20,7 +19,6 @@ RSpec.describe 'create event', type: :feature do
 
   scenario 'with valid user and invalid inputs' do
     visit new_user_registration_path
-    fill_in 'Username', with: 'username_test'
     fill_in 'Email', with: 'newusertest@user.com'
     fill_in 'Password', with: 'password'
     fill_in 'Password confirmation', with: 'password'
