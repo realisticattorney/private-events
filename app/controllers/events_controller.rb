@@ -22,18 +22,22 @@ class EventsController < ApplicationController
 
   # POST /events or /events.json
   def create
-    @event = current_user.attended_events.build(event_params)
+    @event = current_user.events.build(event_params)
 
-    respond_to do |format|
-      if @event.save
-        format.html { redirect_to @event, notice: 'Event was successfully created.' }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
+
+    if @event.save
+      respond_to do |format|
+        format.html { redirect_to '/', notice: "Event posted!" }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        puts @event.errors.full_messages
+        format.html { redirect_to '/', alert: "Event could not be posted..." }
+        format.json { head :no_content }
       end
     end
   end
-
   # PATCH/PUT /events/1 or /events/1.json
   def update
     authorize @event
