@@ -13,7 +13,6 @@ class Enrollment < ApplicationRecord
     "#{user} #{event}"
   end
 
-
   scope :upcoming, -> { joins(:event).merge(Event.upcoming) }
   scope :past, -> { joins(:event).merge(Event.past) }
 

@@ -3,8 +3,8 @@ class EventsController < ApplicationController
 
   # GET /events or /events.json
   def index
-    @events = Event.all
-    @latest_events = Event.all.limit(3).order(created_at: :desc)
+    @past_events = Event.past
+    @upcoming_events = Event.upcoming
   end
 
   # GET /events/1 or /events/1.json
@@ -13,7 +13,6 @@ class EventsController < ApplicationController
   # GET /events/new
   def new
     @event = Event.new
-    @event.host = current_user.username
   end
 
   # GET /events/1/edit
@@ -23,8 +22,7 @@ class EventsController < ApplicationController
 
   # POST /events or /events.json
   def create
-    @event = Event.new(event_params)
-    @event.host_id = current_user.id
+    @event = current_user.attended_events.build(event_params)
 
     respond_to do |format|
       if @event.save

@@ -26,10 +26,10 @@
             <% end %>
           </li>
            <% end %>
-          <li class="<%= 'active font-weight-bold' if current_page?(enrollments_path) %> nav-item">
-            <%= link_to enrollments_path, class: 'nav-link' do %>
+          <li class="<%= 'active font-weight-bold' if current_page?(user_path(current_user)) %> nav-item">
+            <%= link_to user_path(current_user), class: 'nav-link' do %>
               <div class="fa fa-lock-open"></div>
-              Enrollments
+              Your Attendances
             <% end %>
           </li>
       </ul>

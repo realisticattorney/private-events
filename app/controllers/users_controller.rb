@@ -14,6 +14,8 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(current_user.id)
+    @past_events = current_user.attended_events.past
+    @upcoming_events = current_user.attended_events.upcoming
     # @upcoming = @user.attended_events.coming_events
     # @past_events = @user.attended_events.past_events
   end

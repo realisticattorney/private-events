@@ -2,8 +2,7 @@
     Upcoming Events
   </h2>
 
-  <% @events.each do |event| %>
-    <% if DateTime.now.utc < event.date %>
+  <% @upcoming_events.each do |event| %>
     
       <div class="card">
       <div class="card-header h2">
@@ -33,7 +32,6 @@
      <% end %>
     </div>
   <% end %>
-<% end %>
 
 <br>
 <br>
@@ -42,8 +40,7 @@
     Past Events
   </h2>
 
-  <% @events.each do |event| %>
-    <% if DateTime.now.utc > event.date %>
+  <% @past_events.each do |event| %>
       <div class="card">
       <div class="card-header h2">
         <%= link_to event.title, event_path(event) %>
@@ -72,4 +69,3 @@
      <% end %>
     </div>
   <% end %>
-<% end %>
