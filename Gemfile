@@ -39,8 +39,10 @@ group :development do
   gem 'web-console', '>= 3.3.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'better_errors', '~> 2.5'
+  gem 'database_cleaner'
   gem 'guard', '~> 2.15', '>= 2.15.1'
   gem 'guard-livereload', '~> 2.5', '>= 2.5.2'
+  gem 'rspec-rails'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
@@ -49,6 +51,7 @@ group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
+  gem 'shoulda-matchers', '~> 4.5', '>= 4.5.1'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
 end
