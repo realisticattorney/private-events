@@ -11,7 +11,7 @@ RSpec.describe 'create event', type: :feature do
     visit new_event_path
     fill_in 'Title', with: 'new test event'
     fill_in 'The event details', with: 'test text'
-    fill_in 'The date of the event', with: DateTime.now
+    fill_in 'The date of the event', with: Time.now
     click_on 'Create Event'
 
     expect(page).to have_content('Event was successfully created.')
