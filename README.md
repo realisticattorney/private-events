@@ -39,9 +39,22 @@ To get a local copy up and running follow these simple example steps.
 3- Go to members-only repository by typing $ cd members-only
 4- Enter $ bundle install to install bundler gem
 
-5- Finally, run $ rails db:migrate to run all the migrations needed on the database.
+5- Now run: 
 
-Now enter $ rails console to run the app
+$ rails db:create 
+$ rails db:migrate 
+
+to run all the migrations needed on the database.
+
+6- Finally, enter the following command to run the app on your server
+
+$ rails server
+
+### How to Run Tests
+
+1- Make sure you have already run $ bundle install
+
+2- Run this on the console: rspec spec/-FILENAME-.rb
 
 ## Author
 

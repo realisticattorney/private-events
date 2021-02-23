@@ -13,8 +13,4 @@ class Event < ApplicationRecord
 
   scope :upcoming, -> { where('date > ?', Time.now) }
   scope :past, -> { where('date < ?', Time.now) }
-
-  # def enrolled(user)
-  #     self.enrollments.where(host_id: [user.id], event_id: [self.id]).empty?
-  #   end
 end

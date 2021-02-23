@@ -4,10 +4,9 @@ class Enrollment < ApplicationRecord
 
   validates :user, :event, presence: true
 
-  validates_uniqueness_of :user_id, scope: :event_id # user cant be subscribed to the same event twice
-  validates_uniqueness_of :event_id, scope: :user_id # user cant be subscribed to the same event twice
-
-  validate :cant_subscribe_to_own_event # user can't create a subscription if event.user == current_user.id
+  validates_uniqueness_of :user_id, scope: :event_id
+  validates_uniqueness_of :event_id, scope: :user_id
+  validate :cant_subscribe_to_own_event
 
   def to_s
     "#{user} #{event}"
