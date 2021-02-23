@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   before_action :set_event, only: %i[show edit update destroy]
+  # before_action :set_enrollment, only: %i[show]
 
   # GET /events or /events.json
   def index
@@ -8,7 +9,9 @@ class EventsController < ApplicationController
   end
 
   # GET /events/1 or /events/1.json
-  def show; end
+  def show
+    @enrollment = @event.enrollments
+  end
 
   # GET /events/new
   def new
@@ -24,16 +27,13 @@ class EventsController < ApplicationController
   def create
     @event = current_user.events.build(event_params)
 
-    if @event.save
-      respond_to do |format|
-        format.html { redirect_to '/', notice: 'Event posted!' }
-        format.json { head :no_content }
-      end
-    else
-      respond_to do |format|
-        puts @event.errors.full_messages
-        format.html { redirect_to '/', alert: 'Event could not be posted...' }
-        format.json { head :no_content }
+    respond_to do |format|
+      if @event.save
+        format.html { redirect_to @event, notice: 'Event was successfully created.' }
+        format.json { render :index, status: :created, location: @event }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -68,6 +68,10 @@ class EventsController < ApplicationController
   def set_event
     @event = Event.find(params[:id])
   end
+
+  # def set_enrollment
+  #   @enrollment = Enrollment.find(params[:id])
+  # end
 
   # Only allow a list of trusted parameters through.
   def event_params

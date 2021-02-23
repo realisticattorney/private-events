@@ -1,7 +1,7 @@
 
 <article class="panel is-dark">
   <p class="panel-heading">
-    Upcoming Attended Events
+    Upcoming Attended Events:
   </p>
   <% user.attended_events.upcoming.each do |event| %>
     <%= link_to event.title, event_path(event), class: "panel-block" %>
@@ -11,13 +11,23 @@
   <br>
 <article class="panel">
   <p class="panel-heading">
-    Past Attended Events
+    Past Attended Events:
   </p>
   <% user.attended_events.past.each do |event| %>
-    <%= link_to eventt.title, event_path(event), class: "panel-block" %>
+    <%= link_to event.title, event_path(event), class: "panel-block" %>
   <% end %>
 </article>
-
+<br>
+<br>
+<br>
+<article class="panel">
+    <p class="panel-heading">
+    Your hosted events:
+  </p>
+  <% user.events.each do |event| %>
+    <%= link_to event.title, event_path(event), class: "panel-block" %>
+  <% end %>
+<br><br>
 
   <div class="card-footer">
   <% user.roles.each do |role| %>
@@ -26,3 +36,4 @@
     </div>
   <% end %>
 </div>
+<br>

@@ -42,5 +42,26 @@ RSpec.describe Event, type: :model do
       e.valid?
       expect(e.errors[:date]).to include("can't be blank")
     end
+    it 'if date present but wrong format' do
+      u = Event.new
+      u.date = 'asdf'
+      u.valid?
+      expect(u.errors[:date]).to include("can't be blank")
+    end
+  end
+
+  describe 'all presence' do
+    it 'if host_id not present' do
+      expect do
+        Event.create!(title: 'event', description: 'description',
+                      date: '2020-11-22 18:42:00')
+      end.to raise_error(ActiveRecord::RecordInvalid, 'Validation failed: Host must exist')
+    end
+
+    it 'if all present' do
+      User.create!(username: 'test1', email: 'fan1@example.com', password: 'password1')
+      expect(Event.create!(title: 'event', description: 'description', date: '2020-11-22 18:42:00',
+                           host_id: User.find(1).id).valid?).to be true
+    end
   end
 end

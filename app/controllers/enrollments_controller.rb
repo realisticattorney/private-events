@@ -12,6 +12,7 @@ class EnrollmentsController < ApplicationController
   # GET /enrollments/new
   def new
     @enrollment = Enrollment.new
+    @event = @enrollment.event
   end
 
   # GET /enrollments/1/edit
@@ -59,10 +60,6 @@ class EnrollmentsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_enrollment
     @enrollment = Enrollment.find(params[:id])
-  end
-
-  def set_event
-    @event = Event.find(params[:course_id])
   end
 
   # Only allow a list of trusted parameters through.
