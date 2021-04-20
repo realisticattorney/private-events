@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<div class="row">
+  <div class="col-lg-6">
+  <th> Title </th>
+  <%= @event.title %>
+  <br>
+  <br>
+  <th> Description </th>
+  <%= @event.description %>
+  <br>
+  <br>
+  <th> Host </th>
+  <%= @event.host.email %>
+  <br>
+  <br>
+  <th> List of attendants </th>
+  <% @enrollment.each do |a| %>
+    <%= a.user.email %>
+  <% end %>
+</p>
+
+
+
+
+<%= link_to 'Edit', edit_event_path(@event) %> |
+<%= link_to 'Back', events_path %>
+  </div>
+</div>
+
